@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<img src="" alt="" id='img'>
+	<video id="v" controls autoplay></video>
+	<canvas id='c'></canvas>
+	<button id='t'>Toma una foto</button>
+	<script>
+	window.addEventListener('load', init);
+	function init(){
+		//cargamos los elementos del DOM
+		var video = document.querySelector('#v'), canvas = document.querySelector('#c'),
+		button = document.querySelector('#t'), img = document.querySelector('#img');
+
+		//Validamos getUserMedia en diferentes plataformas
+		navigator.getUserMedia = (navigator.getUserMedia || 
+								navigator.webkitGetUserMedia || 
+								navigator.mozGetUserMedia ||
+								navigator.msGetUserMedia);
+		//traemos el stream
+		navigator.getUserMedia({video:true}, function(stream){
+			video.src = window.URL.createObjectURL(stream);
+			video.play();
+		},function (error){
+			console.log(error);
+		});
+
+		video.addEventListener('loadedmetadata',function(){
+			canvas.width = video.videoWidth;
+			canvas.height = video.videoHeight;
+		}, false);
+		button.addEventListener('click',function(){
+			canvas.getContext('2d').drawImage(video,0,0);
+			var imgData = canvas.toDataURL('image/png');
+			image.setAttribute('src',imgData)
+		});
+	}
+	</script>
+</body>
+</html>

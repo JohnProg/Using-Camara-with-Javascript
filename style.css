@@ -1,0 +1,22 @@
+#t {
+    width: 8em;
+    padding: 1%;
+    margin: 2em;
+}
+#v {
+    width: 48%;
+    border: 3px solid white; border-radius: 5px;
+}
+#c {
+    width: 48%;
+    border: 3px solid white;
+    border-radius: 5px;
+}
+body {
+    width: 100%;
+    background: black;
+    margin: 0;
+    margin-top: 1em;
+    text-align: center;
+    padding: 0;
+}
