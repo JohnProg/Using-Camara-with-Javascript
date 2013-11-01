@@ -2,13 +2,14 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Document</title>
+	<title>Example Using Camera TecTime</title>
+	<link rel="stylesheet" href="style.css">
 </head>
 <body>
 	<img src="" alt="" id='img'>
 	<video id="v" controls autoplay></video>
 	<canvas id='c'></canvas>
-	<button id='t'>Toma una foto</button>
+	<button id='t'>Take A Picture</button>
 	<script>
 	window.addEventListener('load', init);
 	function init(){
@@ -29,14 +30,17 @@
 			console.log(error);
 		});
 
-		video.addEventListener('loadedmetadata',function(){
+		video.addEventListener('loadedmetadata', function(){
 			canvas.width = video.videoWidth;
 			canvas.height = video.videoHeight;
+			var a = setInterval(function(){
+				canvas.getContext('2d').drawImage(video,0,0);
+			}, 20);
 		}, false);
-		button.addEventListener('click',function(){
-			canvas.getContext('2d').drawImage(video,0,0);
+
+		button.addEventListener('click', function(){
 			var imgData = canvas.toDataURL('image/png');
-			image.setAttribute('src',imgData)
+			img.setAttribute('src',imgData);
 		});
 	}
 	</script>
